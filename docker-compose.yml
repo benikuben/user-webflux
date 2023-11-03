@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodata:/data/user
+    ports:
+      - "27017:27017"
+
+  user-webflux:
+    hostname: user-webflux
+    image: user-webflux
+    container_name: user-webflux
+    restart: on-failure
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_HOST: mongodb
+      MONGO_PORT: 27017
+    ports:
+      - "8080:8080"
+
+volumes:
+  mongodata:
