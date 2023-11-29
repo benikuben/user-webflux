@@ -11,9 +11,9 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.neoflex.userwebflux.dtos.ErrorResponse;
-import ru.neoflex.userwebflux.exceptions.ClientAccountException;
-import ru.neoflex.userwebflux.exceptions.ClientValidationException;
 import ru.neoflex.userwebflux.exceptions.NotFoundException;
+import ru.neoflex.userwebflux.exceptions.UserException;
+import ru.neoflex.userwebflux.exceptions.UserValidationException;
 
 import java.util.List;
 
@@ -50,19 +50,19 @@ public class ErrorHandlingControllerAdvice {
         return Mono.just(response);
     }
 
-    @ExceptionHandler(ClientValidationException.class)
+    @ExceptionHandler(UserValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public Mono<ErrorResponse> handleClientValidationException(ClientValidationException e) {
+    public Mono<ErrorResponse> handleClientValidationException(UserValidationException e) {
         ErrorResponse response = new ErrorResponse(e.getMessage());
         log.warn("ClientValidationException {}", response);
         return Mono.just(response);
     }
 
-    @ExceptionHandler(ClientAccountException.class)
+    @ExceptionHandler(UserException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public Mono<ErrorResponse> handleClientAccountException(ClientAccountException e) {
+    public Mono<ErrorResponse> handleClientAccountException(UserException e) {
         ErrorResponse response = new ErrorResponse(e.getMessage());
         log.warn("ClientAccountException {}", response);
         return Mono.just(response);

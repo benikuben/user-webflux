@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ru.neoflex.userwebflux.dtos.ClientDto;
-import ru.neoflex.userwebflux.exceptions.ClientValidationException;
+import ru.neoflex.userwebflux.exceptions.UserValidationException;
 import ru.neoflex.userwebflux.models.validation.ValidationRules;
 import ru.neoflex.userwebflux.services.ValidationService;
 
@@ -56,7 +56,7 @@ public class ValidationServiceImpl implements ValidationService {
                 message.add("Required parameter 'registration_address' is omitted");
 
         if (message.size() > 0) {
-            throw new ClientValidationException(message.toString());
+            throw new UserValidationException(message.toString());
         }
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.BeanUtils;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import ru.neoflex.userwebflux.dtos.SearchFilter;
-import ru.neoflex.userwebflux.exceptions.ClientAccountException;
+import ru.neoflex.userwebflux.exceptions.UserException;
 import ru.neoflex.userwebflux.models.client.Client;
 import ru.neoflex.userwebflux.repositories.client.ClientRepository;
 import ru.neoflex.userwebflux.services.impl.ClientServiceImpl;
@@ -72,6 +72,6 @@ class ClientServiceTest {
     @Test
     void search() {
         SearchFilter filters = new SearchFilter();
-        assertThrows(ClientAccountException.class, () -> clientService.search(filters));
+        assertThrows(UserException.class, () -> clientService.search(filters));
     }
 }

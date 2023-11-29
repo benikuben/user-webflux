@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.neoflex.userwebflux.dtos.ClientDto;
-import ru.neoflex.userwebflux.exceptions.ClientValidationException;
+import ru.neoflex.userwebflux.exceptions.UserValidationException;
 import ru.neoflex.userwebflux.models.validation.ValidationRules;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,11 +33,11 @@ class ValidationServiceTest {
         ClientDto client1 = ClientDto.builder()
                 .email("ivan@mail.ru")
                 .build();
-        assertThrows(ClientValidationException.class, () -> validationService.validateRequiredParameters(validationRules, client1));
+        assertThrows(UserValidationException.class, () -> validationService.validateRequiredParameters(validationRules, client1));
 
         ClientDto client2 = ClientDto.builder()
                 .firstName("Ivan")
                 .build();
-        assertThrows(ClientValidationException.class, () -> validationService.validateRequiredParameters(validationRules, client2));
+        assertThrows(UserValidationException.class, () -> validationService.validateRequiredParameters(validationRules, client2));
     }
 }

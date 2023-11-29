@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.neoflex.userwebflux.dtos.SearchFilter;
-import ru.neoflex.userwebflux.exceptions.ClientAccountException;
+import ru.neoflex.userwebflux.exceptions.UserException;
 import ru.neoflex.userwebflux.models.client.Client;
 import ru.neoflex.userwebflux.repositories.client.ClientRepository;
 import ru.neoflex.userwebflux.services.ClientService;
@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
                 .add(filters.getEmail(), client.email::containsIgnoreCase)
                 .buildAnd();
         if (predicates == null) {
-            throw new ClientAccountException("At least one search field must be specified");
+            throw new UserException("At least one search field must be specified");
         }
         return clientRepository.findAll(predicates);
     }
